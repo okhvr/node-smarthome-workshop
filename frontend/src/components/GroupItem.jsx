@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { devicePropType } from '../constants';
 
-export default class DeviceItem extends PureComponent {
+export default class GroupItem extends PureComponent {
     render() {
         const { index, group } = this.props;
 
@@ -27,11 +27,11 @@ export default class DeviceItem extends PureComponent {
     }
 }
 
-DeviceItem.defaultProps = {
+GroupItem.defaultProps = {
     onUpdate: () => {}
 };
 
-DeviceItem.propTypes = {
+GroupItem.propTypes = {
     group: PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired
