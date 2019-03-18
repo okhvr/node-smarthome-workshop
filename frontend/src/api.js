@@ -2,23 +2,52 @@ import axios from 'axios';
 
 const serverUrl = 'http://localhost:3005';
 
-// let index = 3;
-// let devices = {
-//     device1: {
-//         id: 'device1',
-//         name: 'Device #1',
-//         address: '192.168.1.50',
-//         port: 90,
-//         state: 'on'
-//     },
-//     device2: {
-//         id: 'device2',
-//         name: 'Device #2',
-//         address: '192.168.1.60',
-//         port: 80,
-//         state: 'off'
-//     }
-// };
+let index = 2;
+let groups = {
+    group1: {
+        id: 1,
+        name: 'Group 1',
+        devices: []
+    },
+    group2: {
+        id: 2,
+        name: 'Group 2',
+        devices: []
+    },
+};
+
+export async function getGroups() {
+    return Object.values(groups);
+}
+
+export async function getGroupById(groupId) {
+    return groups.group1;
+}
+
+
+export async function addGroup(group) {
+    index += 1;	    
+    groups[index] = {	
+        id: index,	
+        ...group
+    };
+}
+
+export async function removeGroup(groupId) {
+    console.log('removed)');
+}
+
+export async function switchOnGroup(groupId) {
+    console.log('ONNN');
+}
+
+export async function switchOffGroup(groupId) {
+    console.log('Offfff');
+}
+
+export async function updateGroup(groupId, data) {
+    console.log('updated');
+}
 
 export async function getDevices() {
     const response = await axios.get(`${serverUrl}/devices`);
