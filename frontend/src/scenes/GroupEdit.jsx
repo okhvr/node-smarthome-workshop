@@ -15,8 +15,6 @@ export default class DeviceEdit extends PureComponent {
     componentDidMount = async () => {
         this.refreshDevices();
         const { id } = this.props.match.params;
-var a = await getGroupById(id);
-console.log('========', a);
         this.setState({
             group: await getGroupById(id)
         });
@@ -30,7 +28,6 @@ console.log('========', a);
 
     handleFormSubmit = async (group) => {
         const { id } = this.props.match.params;
-
         await updateGroup(id, group);
         window.history.back();
     };

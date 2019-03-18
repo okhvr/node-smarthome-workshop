@@ -35,8 +35,8 @@ export default class GroupsAdd extends PureComponent {
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="#/">Home</a></li>
-                                <li className="breadcrumb-item"><a href="#/devices">Devices</a></li>
-                                <li className="breadcrumb-item active" aria-current="page">Add device</li>
+                                <li className="breadcrumb-item"><a href="#/devices">Groups</a></li>
+                                <li className="breadcrumb-item active" aria-current="page">Add group</li>
                             </ol>
                         </nav>
                     </div>

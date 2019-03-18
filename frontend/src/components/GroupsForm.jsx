@@ -8,14 +8,12 @@ export default class GroupsForm extends PureComponent {
     };
 
     handleSubmit = (event) => {
-        const selectedOptionіonsValues = Array.from(event.target.devicesOptions.selectedOptions)
+        const selectedOptionіonsIds = Array.from(event.target.devicesOptions.selectedOptions)
             .map(option => option.value);
-        const selectedOptions = selectedOptionіonsValues
-            .map(value => this.props.devices.find(device => device.name === value));
         this.props.onSubmit({
             ...this.props.group,
             name: event.target.groupName.value,
-            devices: selectedOptions 
+            devices: selectedOptionіonsIds 
         });
 
         event.preventDefault();
@@ -39,9 +37,15 @@ export default class GroupsForm extends PureComponent {
 
                 <div className="form-group">
                     <label htmlFor="devicesOptions">Select devices</label>
-                    <select multiple className="form-control" id="devicesOptions">
+                    <select multiple
+                        className="form-control"
+                        id="devicesOptions"
+                        defaultValue={this.props.group.devices}>
                         {this.props.devices.map((device) =>
-                            <option key={device.id} selected={this.props.group.devices.some(d => d.id === device.id)}>{device.name}</option>
+                            <option key={device.id}
+                                value={device.id}>
+                                {device.name}
+                            </option>
                         )}
                     </select>
                 </div>
@@ -59,6 +63,7 @@ export default class GroupsForm extends PureComponent {
 GroupsForm.defaultProps = {
     group: {
         name: 'new group',
+        devices: [],
     }
 };
 

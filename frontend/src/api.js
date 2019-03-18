@@ -2,51 +2,39 @@ import axios from 'axios';
 
 const serverUrl = 'http://localhost:3005';
 
-let index = 2;
-let groups = {
-    group1: {
-        id: 1,
-        name: 'Group 1',
-        devices: []
-    },
-    group2: {
-        id: 2,
-        name: 'Group 2',
-        devices: []
-    },
-};
-
 export async function getGroups() {
-    return Object.values(groups);
+    const response = await axios.get(`${serverUrl}/groups`);
+    return response.data;
 }
 
 export async function getGroupById(groupId) {
-    return groups.group1;
+    const response = await axios.get(`${serverUrl}/groups/${groupId}`);
+    return response.data;
 }
 
 
 export async function addGroup(group) {
-    index += 1;	    
-    groups[index] = {	
-        id: index,	
-        ...group
-    };
+    return axios.post(`${serverUrl}/groups`, group);
 }
 
 export async function removeGroup(groupId) {
-    console.log('removed)');
+    return axios.delete(`${serverUrl}/groups/${groupId}`);
 }
 
 export async function switchOnGroup(groupId) {
-    console.log('ONNN');
+    await updateGroup(groupId, {
+        state: 'on'
+    });
 }
 
 export async function switchOffGroup(groupId) {
-    console.log('Offfff');
+    await updateGroup(groupId, {
+        state: 'off'
+    });
 }
 
 export async function updateGroup(groupId, data) {
-    console.log('updated');
+    return axios.put(`${serverUrl}/groups/${groupId}`, data)
 }
 
 export async function getDevices() {

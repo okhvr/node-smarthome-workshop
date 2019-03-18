@@ -86,7 +86,7 @@ router.put('/:id', async (req, res) => {
 
         const url = `http://${device.address}:${device.port}`;
         const command = device.state ? 'Power off' : 'Power On';
-        await sendRequest(`${url}/cm?cmnd=${command}`);
+            await sendRequest(`${url}/cm?cmnd=${command}`);
 
         res.sendStatus(200);
     } catch (e) {
