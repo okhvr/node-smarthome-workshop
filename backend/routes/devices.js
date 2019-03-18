@@ -16,13 +16,17 @@ function Log(action) {
 
 function sendRequest(url) {
     return new Promise((resolve, reject) => {
-        http.get(url, (res) => {
+        const req = http.get(url, (res) => {
             if (res.statusCode !== 200) {
                 reject(res.statusCode)
             } else {
                 resolve();
             }
         });
+
+        req.on('error', ()=>{
+            reject('device not found');
+        })
     });
 }
 
@@ -86,8 +90,11 @@ router.put('/:id', async (req, res) => {
 
         const url = `http://${device.address}:${device.port}`;
         const command = device.state ? 'Power off' : 'Power On';
-            await sendRequest(`${url}/cm?cmnd=${command}`);
-
+            try {
+                await sendRequest(`${url}/cm?cmnd=${command}`);
+            } catch (e) {
+                console.log('Smth went wrong', e);
+            }
         res.sendStatus(200);
     } catch (e) {
         res.sendStatus(404);
